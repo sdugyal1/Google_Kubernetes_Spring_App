@@ -1,0 +1,9 @@
+debug: false
+artifactory:
+  username: admin
+  password: Gc53ktEW2C
+  baseUrl: 'http://35.225.37.29/artifactory/'
+  searchUrl: api/search/aql
+  statsUrl: "api/storage/$repo/$path/$fileName?stats"
+
+
