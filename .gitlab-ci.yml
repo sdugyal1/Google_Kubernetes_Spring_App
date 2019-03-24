@@ -11,7 +11,7 @@ stages:
   - deploy
 
 build:
-  stage: test
+  stage: build
   script:
     - 'mvn $MAVEN_CLI_OPTS deploy site site:stage'
   only:
