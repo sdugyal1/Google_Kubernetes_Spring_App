@@ -45,16 +45,12 @@
 	</build>
 
 <distributionManagement>
-        <repository>
-            <id>release</id>
-            <name>TheCodeLabs-releases</name>
-            <url>http://35.238.38.172/artifactory/codingchallenge-release</url>
-        </repository>
-        <snapshotRepository>
-            <id>snapshots</id>
-            <name>TheCodeLabs-snapshots</name>
-            <url>http://35.238.38.172/artifactory/codingchallenge-snapshots</url>
-        </snapshotRepository>
+     <repository>
+     <id>central</id>
+     <name>83d43b5afeb5-releases</name>
+     <url>${env.MAVEN_REPO_URL}/libs-release-local</url>
+   </repository>
+       
     </distributionManagement>
 
     <repositories>
