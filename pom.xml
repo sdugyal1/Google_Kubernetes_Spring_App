@@ -45,13 +45,17 @@
 	</build>
 
 <distributionManagement>
-     <repository>
-     <id>central</id>
-     <name>83d43b5afeb5-releases</name>
-     <url>${env.MAVEN_REPO_URL}/libs-release-local</url>
-   </repository>
-       
-    </distributionManagement>
+    <repository>
+        <id>central</id>
+        <name>artifactory-node2.root_default-releases</name>
+        <url>http://35.238.38.172:80/artifactory/automation-mvn-excercise-snapshot-local</url>
+    </repository>
+    <snapshotRepository>
+        <id>snapshots</id>
+        <name>artifactory-node2.root_default-snapshots</name>
+        <url>http://35.238.38.172:80/artifactory/automation-mvn-excercise-snapshot-local</url>
+    </snapshotRepository>
+</distributionManagement>
 
     <repositories>
         <repository>
