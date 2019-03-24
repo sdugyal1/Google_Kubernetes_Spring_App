@@ -1,0 +1,6 @@
+---
+applications:
+- name: jfrog-codingchallenge
+  random-route: true
+  memory: 1G
+  path: target/spring-codingchallenge-1.0.1.jar
