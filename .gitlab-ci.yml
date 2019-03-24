@@ -19,10 +19,20 @@ test:
   script:
     - mvn $MAVEN_CLI_OPTS test
 
-deploy:
-  stage: deploy
+package:
+  stage: package
   script:
     - mvn $MAVEN_CLI_OPTS deploy
   only:
     - master
+
+deploy:
+  stage: deploy
+  script:
+  - curl --location "https://cli.run.pivotal.io/stable?release=linux64-binary&source=github" | tar zx
+  - ./cf login -u $CF_USERNAME -p $CF_PASSWORD -a api.run.pivotal.io
+  - ./cf push
+  only:
+  - master    
+    
 
