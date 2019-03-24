@@ -6,30 +6,6 @@ variables:
 cache:
   paths:
     - .m2/repository
-
-.validate: &validate
-  stage: build
-  script:
-    - 'mvn $MAVEN_CLI_OPTS test-compile'
-
-.verify: &verify
-  stage: test
-  script:
-    - 'mvn $MAVEN_CLI_OPTS verify site site:stage'
-  except:
-    - master
-
-validate:jdk8:
-  <<: *validate
-  image: maven:3.3.9-jdk-8
-
-verify:jdk8:
-  <<: *verify
-  image: maven:3.3.9-jdk-8
-    
-  
-  
-
 stages:
   - build
   - deploy
