@@ -15,6 +15,6 @@ spec:
         image: registry.gitlab.com/sdugyal/jfrog_analytics
         imagePullPolicy: Always
         ports:
-        - containerPort: 8080
+        - containerPort: 80
       imagePullSecrets:
         - name: registry.gitlab.com
