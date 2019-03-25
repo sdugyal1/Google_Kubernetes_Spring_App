@@ -5,12 +5,22 @@ metadata:
   namespace: gitlab-managed-apps
   annotations:
     kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"  
 spec:
+  backend:
+    serviceName: jfrog-cc-service
+    servicePort: 8080
   rules:
-  - http:
+  - host: jfrog-gitlab-codingchallge.gcp.com
+    http:
       paths:
-      - path: /*
-        backend:
+      - backend:
           serviceName: jfrog-cc-service
           servicePort: 8080
+  - host: jfrog-gitlab-codingchallge.gcp.com
+    http:
+      paths:
+      - path: /api/*
+        backend:
+          serviceName: jfrog-cc-service
+          servicePort: 8080          
