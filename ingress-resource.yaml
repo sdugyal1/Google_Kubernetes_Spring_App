@@ -10,7 +10,7 @@ spec:
   rules:
   - http:
       paths:
-      - path: /api
+      - path: /*
         backend:
           serviceName: ingress-nginx-ingress-default-backend
-          servicePort: 80
+          servicePort: 8080
