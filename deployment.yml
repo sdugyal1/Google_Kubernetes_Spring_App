@@ -1,16 +1,16 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: actuator-sample
+  name: virtual-ego-235417
 spec:
   replicas: 2
   template:
     metadata:
       labels:
-        app: actuator-sample
+        app: virtual-ego-235417
     spec:
       containers:
-      - name: actuator-sample
+      - name: jfrog-codingchalenge-cluster
         image: registry.gitlab.com/sdugyal/jfrog_analytics
         imagePullPolicy: Always
         ports:
