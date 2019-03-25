@@ -6,8 +6,8 @@ metadata:
 spec:
   type: NodePort
   selector:
-    greeting: jfrog
-    department: cc-service
+    app: virtual-ego-235417
+    commit: $CI_COMMIT_SHAe
   ports:
   - protocol: TCP
     port: 8080
