@@ -3,17 +3,25 @@ kind: Ingress
 metadata:
   name: ingress-resource
   namespace: gitlab-managed-apps
-  resourceVersion: "195714"
-  selfLink: /apis/extensions/v1beta1/namespaces/gitlab-managed-apps/ingresses/ingress-resource
-  uid: c84adf80-4f3e-11e9-aa83-42010a8a0111
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"  
 spec:
+  backend:
+    serviceName: jfrog-cc-service
+    servicePort: 8080
   rules:
+  - host: jfrog-gitlab-codingchallge.gcp.com
     http:
-      paths: /
+      paths:
       - backend:
           serviceName: jfrog-codingchalenge-cluster
           servicePort: 8080
-status:
-  loadBalancer:
-    ingress:
-    - ip: 35.227.190.7
+  - host: jfrog-gitlab-codingchallge.gcp.com
+    http:
+      paths:
+      - path: /api/*
+        backend:
+          serviceName: jfrog-codingchalenge-cluster
+          servicePort: 8080   
+    
