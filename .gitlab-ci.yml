@@ -5,8 +5,7 @@ stages:
   - test
   - review
   - staging
-  - production
-  - cleanup
+
 
 variables:
   OPENSHIFT_SERVER: console.starter-us-east-1.openshift.com
@@ -32,3 +31,15 @@ test2:
     - oc project "$CI_PROJECT_NAME"
   script:
     - "oc start-build openjdk-app -n jfrog-codingchallenge"
+staging:
+  <<: *deploy
+  stage: staging
+  variables:
+    APP: staging
+    APP_HOST: $CI_PROJECT_NAME-staging.$OPENSHIFT_DOMAIN
+  environment:
+    name: staging
+    url: http://$CI_PROJECT_NAME-staging.$OPENSHIFT_DOMAIN
+  only:
+    - master
+
