@@ -1,10 +1,17 @@
-image: docker:latest
+image: docker:stable
 services:
   - docker:dind
 
+
+  
 variables:
-  DOCKER_DRIVER: overlay
+  CONTAINER_IMAGE: registry.gitlab.com/$CI_PROJECT_PATH
+  DOCKER_HOST: tcp://docker:2375
+  DOCKER_DRIVER: overlay2
   SPRING_PROFILES_ACTIVE: gitlab-ci
+  
+before_script:
+  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com  
 
 stages:
   - build
