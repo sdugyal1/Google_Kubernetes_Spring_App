@@ -7,7 +7,7 @@ spec:
   selector:
     matchLabels:
      app: virtual-ego-235417
-     commit: $CI_COMMIT_SHA
+     commit: latest
   replicas: 2
   template:
     metadata:
