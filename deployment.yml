@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
       - name: actuator-sample
-        image: registry.gitlab.com/codingchallenge/actuator-sample
+        image: registry.gitlab.com/sdugyal/jfrog_analytics
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
