@@ -9,7 +9,7 @@ metadata:
 spec:
   rules:
     http:
-      paths: /*
+      paths: /
       - backend:
           serviceName: jfrog-codingchalenge-cluster
           servicePort: 8080
