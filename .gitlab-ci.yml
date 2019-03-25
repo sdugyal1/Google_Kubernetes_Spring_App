@@ -19,7 +19,8 @@ stages:
 maven-build:
   image: maven:3-jdk-8
   stage: build
-  script: "mvn package -B"
+  script: 
+    - echo "$GOOGLE_KEY" > key.json
   artifacts:
     paths:
       - target/*.jar
@@ -27,9 +28,8 @@ maven-build:
 docker-build:
   stage: package
   script:
-  - docker build -t registry.gitlab.com/sdugyal/jfrog_analytics .
-  - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
-  - docker push registry.gitlab.com/sdugyal/jfrog_analytics
+  - echo "$GOOGLE_KEY" > key.json
+
 
 k8s-deploy:
   image: google/cloud-sdk
