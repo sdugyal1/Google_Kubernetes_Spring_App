@@ -9,8 +9,8 @@ stages:
   - cleanup
 
 variables:
-  OPENSHIFT_SERVER: openshift.default.svc.cluster.local
-  # OPENSHIFT_DOMAIN: apps.example.com
+  OPENSHIFT_SERVER: console.starter-us-east-1.openshift.com
+  OPENSHIFT_DOMAIN: jfrog-codingchallenge
   # Configure this variable in Secure Variables:
   # OPENSHIFT_TOKEN: my.openshift.token
 
