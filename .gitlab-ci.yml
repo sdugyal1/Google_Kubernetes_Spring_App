@@ -22,9 +22,9 @@ maven-build:
 docker-build:
   stage: package
   script:
-  - docker build -t registry.gitlab.com/codingchallenge/actuator-sample .
+  - docker build -t registry.gitlab.com/sdugyal/jfrog_analytics
   - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
-  - docker push registry.gitlab.com/codingchallenge/actuator-sample
+  - docker push registry.gitlab.com/sdugyal/jfrog_analytics
 
 k8s-deploy:
   image: google/cloud-sdk
@@ -37,6 +37,6 @@ k8s-deploy:
   - gcloud config set container/use_client_certificate True
   - gcloud container clusters get-credentials actuator-sample
   - kubectl delete secret registry.gitlab.com
-  - kubectl create secret docker-registry registry.gitlab.com --docker-server=https://registry.gitlab.com --docker-username=dugyala.srikanth.rao@gmail.com --docker-password=$REGISTRY_PASSWD --docker-email=dugyala.srikanth.rao@gmail.com
+  - kubectl create secret docker-registry registry.gitlab.com --docker-server=https://registry.gitlab.com --docker-username=sdugyal --docker-password=$REGISTRY_PASSWD --docker-email=dugyala.srikanth.rao@gmail.com
   - kubectl apply -f deployment.yml
 
