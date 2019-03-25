@@ -21,6 +21,8 @@ test:
 
 deploy:
   stage: deploy
+  script:
+    - mvn $MAVEN_CLI_OPTS deploy
   environment:
     name: development
     url: https://development-jfrog-codingchalenge-com.com
