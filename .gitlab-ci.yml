@@ -1,45 +1,42 @@
-# This file is a template, and might need editing before it works on your project.
-image: ayufan/openshift-cli
-
-stages:
-  - test
-  - review
-  - staging
-
+mage: docker:latest
+services:
+  - docker:dind
 
 variables:
-  OPENSHIFT_SERVER: console.starter-us-east-1.openshift.com
-  OPENSHIFT_DOMAIN: jfrog-codingchallenge
-  # Configure this variable in Secure Variables:
-  # OPENSHIFT_TOKEN: my.openshift.token
+  DOCKER_DRIVER: overlay
+  SPRING_PROFILES_ACTIVE: gitlab-ci
 
-test1:
-  stage: test
-  before_script: []
-  script:
-    - echo run tests
+stages:
+  - build
+  - package
+  - deploy
 
-test2:
-  stage: test
-  before_script: []
-  script:
-    - echo run tests
+maven-build:
+  image: maven:3-jdk-8
+  stage: build
+  script: "mvn package -B"
+  artifacts:
+    paths:
+      - target/*.jar
 
-.deploy: &deploy
-  before_script:
-    - oc login https://api.starter-us-east-1.openshift.com --token=8-mDrpPUQDhB7lVaMKx8vfoEo2fwcyPQ-P3qA7MeMio --insecure-skip-tls-verify
-    - oc project "$CI_PROJECT_NAME"
+docker-build:
+  stage: package
   script:
-    - "oc start-build openjdk-app -n jfrog-codingchallenge"
-staging:
-  <<: *deploy
-  stage: staging
-  variables:
-    APP: staging
-    APP_HOST: $CI_PROJECT_NAME-staging.$OPENSHIFT_DOMAIN
-  environment:
-    name: staging
-    url: http://$CI_PROJECT_NAME-staging.$OPENSHIFT_DOMAIN
-  only:
-    - master
+  - docker build -t registry.gitlab.com/codingchallenge/actuator-sample .
+  - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
+  - docker push registry.gitlab.com/codingchallenge/actuator-sample
+
+k8s-deploy:
+  image: google/cloud-sdk
+  stage: deploy
+  script:
+  - echo "$GOOGLE_KEY" > key.json
+  - gcloud auth activate-service-account --key-file key.json
+  - gcloud config set compute/zone europe-west1-c
+  - gcloud config set project actuator-sample
+  - gcloud config set container/use_client_certificate True
+  - gcloud container clusters get-credentials actuator-sample
+  - kubectl delete secret registry.gitlab.com
+  - kubectl create secret docker-registry registry.gitlab.com --docker-server=https://registry.gitlab.com --docker-username=dugyala.srikanth.rao@gmail.com --docker-password=$REGISTRY_PASSWD --docker-email=dugyala.srikanth.rao@gmail.com
+  - kubectl apply -f deployment.yml
 
