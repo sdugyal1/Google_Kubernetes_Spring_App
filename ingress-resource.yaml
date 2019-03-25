@@ -12,5 +12,5 @@ spec:
       paths:
       - path: /*
         backend:
-          serviceName: codingchallenge
+          serviceName: jfrog-cc-service
           servicePort: 8080
