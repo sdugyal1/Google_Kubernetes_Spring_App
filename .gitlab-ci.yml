@@ -13,6 +13,23 @@ services:
 
 stages:
   - build
+  - package
+  - deploy
+
+maven-build:
+  image: maven:3-jdk-8
+  stage: build
+  script: "mvn package -B"
+  artifacts:
+    paths:
+      - target/*.jar
+
+docker-build:
+  stage: package
+  script:
+  - docker build -t registry.gitlab.com/sdugyal/jfrog_analytics .
+  - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
+  - docker push registry.gitlab.com/sdugyal/jfrog_analytics
 
 
 k8s-deploy:
