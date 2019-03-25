@@ -4,6 +4,10 @@ metadata:
   name: codingchallenge
   namespace: gitlab-managed-apps
 spec:
+  selector:
+    matchLabels:
+     greeting: jfrog
+     department: cc-service
   replicas: 2
   template:
     metadata:
