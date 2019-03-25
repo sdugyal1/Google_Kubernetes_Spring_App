@@ -13,4 +13,4 @@ spec:
       - path: /
         backend:
           serviceName: ingress-nginx-ingress-default-backend
-          servicePort: 8080
+          servicePort: 80
