@@ -12,5 +12,5 @@ spec:
       paths:
       - path: /*
         backend:
-          serviceName: ingress-nginx-ingress-default-backend
+          serviceName: codingchallenge
           servicePort: 8080
