@@ -11,5 +11,5 @@ spec:
       paths:
       - path: /
         backend:
-          serviceName: jfrog_analytics
+          serviceName: ingress-nginx-ingress-default-backend
           servicePort: 8080
