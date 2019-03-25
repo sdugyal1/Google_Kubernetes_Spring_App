@@ -28,4 +28,5 @@ k8s-deploy:
   - gcloud config unset container/use_client_certificate
   - gcloud container clusters get-credentials jfrog-codingchalenge-cluster --zone us-west1-b --project virtual-ego-235417
   - kubectl apply -f deployment.yml
+  - kubectl apply -f ingress-resource.yaml
 
