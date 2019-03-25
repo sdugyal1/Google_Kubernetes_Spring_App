@@ -13,7 +13,7 @@ spec:
     metadata:
       labels:
         app: virtual-ego-235417
-        commit: $CI_COMMIT_SHA
+        commit: latest
     spec:
       containers:
       - name: jfrog-codingchalenge-cluster
