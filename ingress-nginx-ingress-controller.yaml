@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: 2019-03-25T00:31:01Z
+  labels:
+    app: nginx-ingress
+    chart: nginx-ingress-1.1.2
+    component: controller
+    heritage: Tiller
+    release: ingress
+  name: ingress-nginx-ingress-controller
+  namespace: gitlab-managed-apps
+  resourceVersion: "188144"
+  selfLink: /api/v1/namespaces/gitlab-managed-apps/services/ingress-nginx-ingress-controller
+  uid: 443b0613-4e95-11e9-aa83-42010a8a0111
+spec:
+  clusterIP: 10.43.247.16
+  externalTrafficPolicy: Cluster
+  ports:
+  - name: http
+    nodePort: 32263
+    port: 80
+    protocol: TCP
+    targetPort: http
+  - name: https
+    nodePort: 30933
+    port: 443
+    protocol: TCP
+    targetPort: https
+  selector:
+    app: nginx-ingress
+    component: controller
+    release: ingress
+  sessionAffinity: None
+  type: LoadBalancer
+status:
+  loadBalancer:
+    ingress:
+    - ip: 35.199.145.165
