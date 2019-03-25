@@ -30,7 +30,7 @@ maven-build:
 maven-deploy:
   image: maven:3-jdk-8
   stage: package
-  script: "mvn deploy"
+  script: "mvn $MAVEN_CLI_OPTS deploy"
   artifacts:
     paths:
       - target/*.jar      
