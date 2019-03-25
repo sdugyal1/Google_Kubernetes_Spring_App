@@ -25,7 +25,7 @@ k8s-deploy:
   - gcloud config set project virtual-ego-235417
   - gcloud config set container/use_client_certificate True
   - gcloud services enable container.googleapis.com
-  - gcloud container clusters get-credentials jfrog-codingchalenge-cluster
   - gcloud config unset container/use_client_certificate
+  - gcloud container clusters get-credentials jfrog-codingchalenge-cluster --zone us-west1-b --project virtual-ego-235417
   - kubectl apply -f deployment.yml
 
