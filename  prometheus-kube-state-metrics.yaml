@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: prometheus
+    chart: prometheus-6.7.3
+    component: kube-state-metrics
+    heritage: Tiller
+    release: prometheus
+  name: prometheus-kube-state-metrics
+  namespace: gitlab-managed-apps
+  resourceVersion: "1453"
+  selfLink: /api/v1/namespaces/gitlab-managed-apps/services/prometheus-kube-state-metrics
+  uid: 7022247c-4e95-11e9-aa83-42010a8a0111
+spec:
+  clusterIP: None
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: prometheus
+    component: kube-state-metrics
+    release: prometheus
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
