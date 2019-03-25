@@ -22,7 +22,7 @@ maven-build:
 docker-build:
   stage: package
   script:
-  - docker build -t registry.gitlab.com/sdugyal/jfrog_analytics .
+  - docker build -t registry.gitlab.com/sdugyal/jfrog_analytics.
   - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
   - docker push registry.gitlab.com/sdugyal/jfrog_analytics
 
