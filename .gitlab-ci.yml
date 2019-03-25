@@ -13,33 +13,18 @@ services:
 
 stages:
   - build
-  - package
-  - deploy
-
-maven-build:
-  image: maven:3-jdk-8
-  stage: build
-  script: 
-    - echo "$GOOGLE_KEY" > key.json
-  artifacts:
-    paths:
-      - target/*.jar
-
-docker-build:
-  stage: package
-  script:
-  - echo "$GOOGLE_KEY" > key.json
 
 
 k8s-deploy:
   image: google/cloud-sdk
-  stage: deploy
+  stage: build
   script:
   - echo "$GOOGLE_KEY" > key.json
   - gcloud auth activate-service-account --key-file key.json
   - gcloud config set compute/zone us-central1-b
   - gcloud config set project virtual-ego-235417
   - gcloud config set container/use_client_certificate True
+  - gcloud services enable container.googleapis.com
   - gcloud container clusters get-credentials jfrog-codingchalenge-cluster
   - kubectl delete secret registry.gitlab.com
   - kubectl create secret docker-registry registry.gitlab.com --docker-server=https://registry.gitlab.com --docker-username=sdugyal --docker-password=$REGISTRY_PASSWD --docker-email=dugyala.srikanth.rao@gmail.com
